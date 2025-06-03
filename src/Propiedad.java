@@ -5,6 +5,7 @@ public class Propiedad {
     private String ubicacion;
     private String descripcion;
     private String caracteristicasAdicionales;
+    private boolean favorita;
 
     public Propiedad(int codigoPropiedad, tipoPropiedad tipo, float precio, String ubicacion, String descripcion,
             String caracteristicasAdicionales) {
@@ -14,6 +15,7 @@ public class Propiedad {
         this.ubicacion = ubicacion;
         this.descripcion = descripcion;
         this.caracteristicasAdicionales = caracteristicasAdicionales;
+        this.favorita = false;
     }
 
     public int getCodigoPropiedad() {
@@ -69,6 +71,14 @@ public class Propiedad {
         return "Propiedad [codigoPropiedad=" + codigoPropiedad + ", tipo=" + tipo + ", precio=" + precio
                 + ", ubicacion=" + ubicacion + ", descripcion=" + descripcion + ", caracteristicasAdicionales="
                 + caracteristicasAdicionales + "]";
+    }
+
+    public boolean isFavorita() {
+        return favorita;
+    }
+
+    public void setFavorita(boolean favorita) {
+        this.favorita = favorita;
     }
 
 }
