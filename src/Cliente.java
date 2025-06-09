@@ -3,13 +3,17 @@
 
 import java.util.Date;
 
+//Creamos al cliente que hereda de Persona
 public class Cliente extends Persona {
+    // Atributos propios del cliente
     private String usuario;
     private String contrasena;
 
     public Cliente(String dNI, String nombre, String apellidos, String direccion, String email, String telefono,
             Date fechaNacimiento, String usuario, String contrasena) {
-        super(dNI, nombre, apellidos, direccion, email, telefono, fechaNacimiento);// Llamamos al constructor de Persona
+        // Creamos el constructor parametrizcado llamando al del padre y, además, le
+        // damos valores a los suyos propios
+        super(dNI, nombre, apellidos, direccion, email, telefono, fechaNacimiento);
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
@@ -30,11 +34,9 @@ public class Cliente extends Persona {
         this.contrasena = contrasena;
     }
 
-    @Override
+    @Override // Ampliamos el toString del padre añadiendo los atributos del hijo
     public String toString() {
-        return "Cliente [usuario=" + usuario + ", contrasena=" + contrasena + "]" + super.toString();// Le concatenamos
-                                                                                                     // el toString de
-                                                                                                     // Persona
+        return "Cliente [usuario=" + usuario + ", contrasena=" + contrasena + "]" + super.toString();
     }
 
 }

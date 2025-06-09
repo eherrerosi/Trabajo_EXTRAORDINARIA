@@ -1,5 +1,6 @@
 import java.util.Date;
 
+//Clase base de mi proyecto, tiene todos los datos de las personas ya vayan a ser cliente o agentes
 public class Persona {
     private String DNI;
     private String Nombre;
@@ -9,8 +10,6 @@ public class Persona {
     private String telefono;
     private Date fechaNacimiento;
 
-    // Constructor parametrizado => vamos a crearnos una persona con los datos que
-    // le pasamos por parámetros
     public Persona(String dNI, String nombre, String apellidos, String direccion, String email, String telefono,
             Date fechaNacimiento) {
         DNI = dNI;
@@ -79,7 +78,7 @@ public class Persona {
     }
 
     @Override
-    public String toString() {
+    public String toString() {// toString de la clase base en las hijas lo ampliaremos
         return "Persona [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos + ", direccion=" + direccion
                 + ", email=" + email + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + "]";
     }

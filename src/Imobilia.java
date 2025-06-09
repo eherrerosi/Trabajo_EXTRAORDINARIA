@@ -1,19 +1,27 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.PriorityQueue;
 
+//Clase gestoria de los inmuebles del empresa
 public class Imobilia {
+    // Atributos que principalmente son todos colecciones
     private ArrayList<Propiedad> lPropiedades;
     private ArrayList<Propiedad> lPropiedadesVendidas;
     private ArrayList<Cliente> lClientes;
     private ArrayList<AgentInmobiliario> lAgentes;
     private ArrayList<Transaccion> lOperaciones;
-    // private ArrayList<Cita> lOperaciones;
+    private PriorityQueue<String> bandeja;// He usado una cola prioritaria, sin aplicar prioridad (funciona como una
+                                          // cola normal), por añadir otra colección disinta
 
-    public Imobilia() {
+    public Imobilia() { // Inicializamos todas las colecciones en el constructor
         lPropiedades = new ArrayList<>();
         lClientes = new ArrayList<>();
         lAgentes = new ArrayList<>();
         lOperaciones = new ArrayList<>();
+        bandeja = new PriorityQueue<>();
+    }
+
+    public void anadirPropiedadVendiad(Propiedad p) {
+        lPropiedadesVendidas.add(p);
     }
 
     public void setlPropiedad(Propiedad propiedad) {
@@ -28,6 +36,7 @@ public class Imobilia {
         this.lAgentes.add(a);
     }
 
+    // Buscamos un Agente según su DNI
     public AgentInmobiliario buscarAgente(String s) {
         AgentInmobiliario c = null;
         for (int i = 0; i < this.lAgentes.size() && c != null; i++) {
@@ -39,6 +48,8 @@ public class Imobilia {
         return c;
     }
 
+    // Actualizamos un agnete con el pasado por parámetro siempre que tenga el mismo
+    // DNI, por ello he creado el método anterior
     public boolean modificarAgente(AgentInmobiliario a) {
         boolean esModificado = false;
         AgentInmobiliario b = buscarAgente(a.getDNI());
@@ -49,11 +60,11 @@ public class Imobilia {
         return esModificado;
     }
 
-    // ELIMINAR BUSCAR MODIFICAR
     public void setCliente(Cliente a) {
         this.lClientes.add(a);
     }
 
+    // Igual que el anterior pero de cliente
     public Cliente buscarCliente(String s) {
         Cliente c = null;
         for (int i = 0; i < this.lClientes.size() && c != null; i++) {
@@ -75,12 +86,23 @@ public class Imobilia {
         return esModificado;
     }
 
-    // ELIMINAR BUSCAR MODIFICAR
+    // Si el cliente se ha olvidado de su contraseña, le permitimos cambiarla
+    // siempre que este ya en nuestro sistema
+    public boolean cambiarPassword(String DNI, String password) {
+        boolean cambiada = false;
+        Cliente c = buscarCliente(DNI);
+        if (c != null) {
+            c.setContrasena(password);
+            cambiada = true;
+        }
+        return cambiada;
+    }
+
     public void setPropiedad(Propiedad a) {
         this.lPropiedades.add(a);
     }
 
-    // ELIMINAR BUSCAR MODIFICAR
+    // Buscamos unas propiedad según su código de propiedad
     public Propiedad buscarPropiedad(int codigoPropiedad) {
         Propiedad c = null;
         for (int i = 0; i < this.lPropiedades.size() && c == null; i++) {
@@ -116,7 +138,7 @@ public class Imobilia {
 
     public boolean marcarPropiedadFavorita(int codigo) {
         boolean esModificado = false;
-        Propiedad b = buscarPropiedad(a.getCodigoPropiedad());
+        Propiedad b = buscarPropiedad(codigo);
         if (b != null) {
             b.setFavorita(true);
             esModificado = true;
@@ -126,7 +148,7 @@ public class Imobilia {
 
     public boolean desmarcarPropiedadFavorita(int codigo) {
         boolean esModificado = false;
-        Propiedad b = buscarPropiedad(a.getCodigoPropiedad());
+        Propiedad b = buscarPropiedad(codigo);
         if (b != null) {
             b.setFavorita(false);
             esModificado = true;
@@ -145,7 +167,7 @@ public class Imobilia {
         }
 
         for (int i = 0; i < this.lAgentes.size() && !eliminado; i++) {
-            Agente c = this.lAgentes.get(i);
+            AgentInmobiliario c = this.lAgentes.get(i);
             if (c.getDNI().equalsIgnoreCase(DNI)) {
                 this.lAgentes.remove(i);
                 eliminado = true;
@@ -156,7 +178,9 @@ public class Imobilia {
 
     @Override
     public String toString() {
-        return "Imobilia [lPropiedades=" + lPropiedades + ", lClientes=" + lClientes + ", lAgentes=" + lAgentes + "]";
+        return "Imobilia [lPropiedades=" + lPropiedades + ", lPropiedadesVendidas=" + lPropiedadesVendidas
+                + ", lClientes=" + lClientes + ", lAgentes=" + lAgentes + ", lOperaciones=" + lOperaciones
+                + ", bandeja=" + bandeja + "]";
     }
 
     public ArrayList<Propiedad> getlPropiedades() {
@@ -197,6 +221,10 @@ public class Imobilia {
 
     public void setlOperaciones(ArrayList<Transaccion> lOperaciones) {
         this.lOperaciones = lOperaciones;
+    }
+
+    public void enviarCorreoASoporte(String msg) {
+        this.bandeja.add(msg);
     }
 
 }

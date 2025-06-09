@@ -1,3 +1,4 @@
+//Clase que gestiona los datos de la propiedad de nuestrsa inmobiliaria
 public class Propiedad {
     private int codigoPropiedad;
     private tipoPropiedad tipo;
@@ -73,6 +74,7 @@ public class Propiedad {
                 + caracteristicasAdicionales + "]";
     }
 
+    // Al ser booleano no se pone sety get en la propiedad favorita
     public boolean isFavorita() {
         return favorita;
     }
