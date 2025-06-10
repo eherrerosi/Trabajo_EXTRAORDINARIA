@@ -111,3 +111,8 @@ Eduardo Herrero Simon
     3. Introducir precio inferior.
     4. Introducir precio máximo.
     5. Ver propiedades disponibles en ese rango.
+   
+
+
+
+![image](https://github.com/user-attachments/assets/171c3dcb-03ff-473d-afab-6ae4995735b9)
