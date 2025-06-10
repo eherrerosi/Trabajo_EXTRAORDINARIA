@@ -113,6 +113,5 @@ Eduardo Herrero Simon
     5. Ver propiedades disponibles en ese rango.
    
 
-
-
+Diagrama de clases del proyecto.
 ![image](https://github.com/user-attachments/assets/171c3dcb-03ff-473d-afab-6ae4995735b9)
